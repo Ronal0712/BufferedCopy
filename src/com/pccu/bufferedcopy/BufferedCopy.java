@@ -14,23 +14,48 @@ public class BufferedCopy {
 		FileWriter fileWriter = null;
 		FileReader fileReader = null;
 		
-		BufferedReader befferedReader = null;
+		BufferedReader bufferedReader = null;
 		PrintWriter printWriter = null;
 		
 		try {
 			fileReader = new FileReader("src/buffered/abstract1.txt");
 			fileWriter = new FileWriter("src/buffered/clonedabstract1.txt");
 			
-			befferedReader = new BufferedReader(fileReader);
+			bufferedReader = new BufferedReader(fileReader);
 			printWriter = new PrintWriter(fileWriter);
 			String flag = "";
-			while((flag = befferedReader.readLine()) != null) {
+			while((flag = bufferedReader.readLine()) != null) {
 				printWriter.println(flag);
 			}
 		}catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}catch (IOException e) {
 			e.printStackTrace();
+		}finally {
+			if(printWriter != null) {
+				printWriter.close();
+			}
+			if(fileWriter != null) {
+				try {
+					fileWriter.close();
+				}catch(IOException e) {
+					e.printStackTrace();
+				}
+			}
+			if(bufferedReader != null) {
+				try {
+					bufferedReader.close();
+				}catch(IOException e) {
+					e.printStackTrace();
+				}
+			}
+			if(fileReader != null) {
+				try {
+					fileReader.close();
+				}catch(IOException e) {
+					e.printStackTrace();
+				}
+			}
 		}
 	}
 
